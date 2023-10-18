@@ -13,7 +13,7 @@ DATA_PATH = Path(__file__).parent.parent / 'data' / '7.decentralization' / 'dece
 #print(DATA_PATH)
 df_allocation = pd.read_excel(DATA_PATH, sheet_name = 'allocation') 
 local_allocation = df_allocation[df_allocation['level'] == 'Local']
-print(local_allocation)
+#print(local_allocation)
 
 def create_layout(app):
     return html.Div(
