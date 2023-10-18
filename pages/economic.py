@@ -227,7 +227,6 @@ def create_layout(app):
                                     html.H5("Summary"),
                                     html.Br([]),
                                     html.P(
-                                        #"\
                                     "Mozambique faces multiple contextual factors that could be “game changers”.\
                                     Each has the potential to affect the CDCS in significantly positive or \
                                     negative ways.  As a result, the Mission started the intervention named \
@@ -236,9 +235,6 @@ def create_layout(app):
                                     identify an approach that must support effective context monitoring and \
                                     inform adaptive decision-making in a rapidly evolving environment. \
                                     MAIS is meant to be a practical and sustainable system over time."\
-                                        #style={'marginRight': '20px'} 
-                                    #html.Br(),
-                                    #html.P(
                                     "The MAIS system is an innovative initiative that aims to provide \
                                     USAID/Mozambique with a platform for data visualization and analysis for \
                                     USAID/Mozambique’s development programs. However, the system was never \
@@ -253,11 +249,34 @@ def create_layout(app):
                         ],
                         className="row",
                     ),
-                    # Row 3.1 #Added by @MGB
-                    #####
-                    #####
-                    #html.H6("Economic Indicators", className="subtitle"), # Header above Horizontal Line
-                    
+
+                    html.H6("List of Economic Indicators", style={'margin-bottom': '0'}),
+                    html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
+                    html.Br([]),
+                    html.P(html.A("Levels and location of food insecurity", href='#food-insecurity', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Fragile States Index", href='', style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Gross Domestic Product (GDP) and GDP growth rate", href='#row2', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Inflation rate", href='#row3', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Youth Unemployment rate", href='#row4', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Poverty rate and income distribution/Gini Index", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Foreign direct investment (FDI) inflows", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Trade balance and export/import levels", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Government debt and fiscal deficit", href='#row5', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Red List Index", href='#row5', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Natural Resources revenues", href='#row4', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Poverty rate and income", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Consumer Price Index (CPI)", href='#cpi', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Government revenues", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Government expenditure", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Debt servicing", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Exchange rate", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Net international reserves", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Interest rates/ MIMO rate", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("Employment and unemployment rate ", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.P(html.A("The ability of the country/economy to create jobs", href='', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                    html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin                   
+
+                    html.Br([]),html.Br([]),
                     html.H6("Annually Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
                     html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
 
@@ -266,7 +285,7 @@ def create_layout(app):
                     html.Div(
                         [
                             html.Div(
-                                [   # Chart 1 ##################
+                                [   # Food Insecurity: October 2022 - March 2023 ##################
                                     html.H6("Food Insecurity: October 2022 - March 2023", className="subtitle padded"),
                                     dcc.Graph(
                                         id="choropleth-map", # Assign a unique id to the graph
@@ -274,17 +293,22 @@ def create_layout(app):
                                         config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
                                         #style={"height": "450px", "margin-bottom": "0px"}  # Set/Adjust the height and margin-bottom of the choropleth map as needed  
                                     ),
-                                    html.P(html.A("Source: Integrated Food Security Phase Classification. Last Updated Date: March, 28th 2023.", href='https://www.ipcinfo.org/ipc-country-analysis/details-map/en/c/1155848/?iso3=MOZ', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                            html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                            html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                            html.A("Source: Integrated Food Security Phase Classification. Last Updated Date: March, 28th 2023.", href='https://www.ipcinfo.org/ipc-country-analysis/details-map/en/c/1155848/?iso3=MOZ', target="_blank", style={"font-size": "10px", "color": "#888"})
+                                            ]),
                                 ],
                                 className="twelve columns",
                                 #style={"margin-bottom": "10px"}  # Adjust the margin-bottom to reduce the empty space
                                 ),
                         ],
                         className="row ",
+                        id = "food-insecurity",
                     ),
-                    # Row 4
+                    # Row 2
                     html.Div(
-                        [   ##### Chart 2 #######
+                        [   ##### GDP (current US$) #######
                             html.Div(
                                 [
                                     html.H6(
@@ -330,13 +354,16 @@ def create_layout(app):
                                          },
                                          config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
                                     ),
-                                    html.P(html.A("Source: The World Bank. Last Updated Date: July, 25th 2023.", href='https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=MZ', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                            html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                            html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                            html.A("Source: The World Bank. Last Updated Date: July, 25th 2023.", href='https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=MZ', target="_blank", style={"font-size": "10px", "color": "#888"})
+                                    ]),
                                 ],
                                 className="six columns",
-                            ),
-                      
+                            ),                     
                             html.Div(
-                                [   ##### Chart 3 #######
+                                [   ##### GDP per capita (current US$) #######
                                     html.H6(
                                         "GDP per capita (current US$)",
                                         className="subtitle padded",
@@ -381,25 +408,27 @@ def create_layout(app):
                                         },
                                         config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
                                     ),
-                                    html.P(html.A("Source: The World Bank. Last Updated Date: July, 25th 2023.", href='https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=MZ', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                            html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                            html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                            html.A("Source: The World Bank. Last Updated Date: July, 25th 2023.", href='https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=MZ', target="_blank", style={"font-size": "10px", "color": "#888"})
+                                    ]),
                                 ],
                                 className="six columns",
                             ),
                         ],
                         className="row",
-                        #style={"margin-bottom": "35px"},
-                    ),
-                    
-                    # Row 5
+                        id = "row2",
+                    ),                   
+                    # Row 3
                     html.Div(
-                        [   ###### Chart 4 ###########
+                        [   ###### GDP growth (annual %) ###########
                             html.Div(
                                 [
                                     html.H6(
                                         "GDP growth (annual %)", 
                                         className="subtitle padded",
                                     ),
-
                                     dcc.Graph(
                                         id="graph-4",
                                         figure={
@@ -441,19 +470,22 @@ def create_layout(app):
                                         config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
 
                                     ),
-                                    html.P(html.A("Source: The World Bank. Last Updated Date: July, 25th 2023.", href='https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?locations=MZ', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                            html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                            html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                            html.A("Source: The World Bank. Last Updated Date: July, 25th 2023.", href='https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?locations=MZ', target="_blank", style={"font-size": "10px", "color": "#888"})
+                                    ]),
                                 ],
                                 className="six columns",
                             ),
                            
-                            ###### Chart 5 ###########
+                            ###### Inflation, Consumer Prices (annual %) ###########
                            html.Div(
                                 [
                                     html.H6(
                                         "Inflation, Consumer Prices (annual %)", 
                                         className="subtitle padded",
                                     ),
-
                                     dcc.Graph(
                                         id="graph-5",
                                         figure={
@@ -494,16 +526,20 @@ def create_layout(app):
                                         },
                                         config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
                                     ),
-                                    #html.P("Source: The World Bank. Last Updated Date: July, 25th 2023.", style={"font-size": "10px", "color": "#888"}),
-                                    html.P(html.A("Source: The World Bank. Last Updated Date: July, 25th 2023.", href='https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations=MZ', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                            html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                            html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                            html.A("Source: The World Bank. Last Updated Date: July, 25th 2023.", href='https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations=MZ', target="_blank", style={"font-size": "10px", "color": "#888"})
+                                    ]),
                                 ],
                                 className="six columns",
                             ),                    
                         ],
-                        className="row ",
+                        className="row",
+                        id = "row3",
                     ), ######### Closing DIV ######### 
 
-                    # Row 6 Repeatition
+                    # Row 4
                     html.Div(
                         [   ###### Youth Unemployment ###########
                             html.Div(
@@ -553,7 +589,11 @@ def create_layout(app):
                                         config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
 
                                     ),
-                                    html.P(html.A("Source: The World Bank. Last Updated Date: September, 5th 2023.", href='https://data.worldbank.org/indicator/SL.UEM.1524.ZS?locations=MZ&most_recent_value_desc=false', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                            html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                            html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                            html.A("Source: The World Bank. Last Updated Date: September, 5th 2023.", href='https://data.worldbank.org/indicator/SL.UEM.1524.ZS?locations=MZ&most_recent_value_desc=false', target="_blank", style={"font-size": "10px", "color": "#888"})
+                                    ]),
                                 ],
                                 className="six columns",
                             ),
@@ -561,10 +601,7 @@ def create_layout(app):
                             ###### Total Natural Resources Rents: % of GDP ###########
                             html.Div(
                                 [
-                                    html.H6(
-                                        "Total Natural Resources Rents: % of GDP", 
-                                        className="subtitle padded",
-                                    ),
+                                    html.H6("Total Natural Resources Rents: % of GDP", className="subtitle padded"),
                                     dcc.Graph(
                                         id="graph-8",
                                         figure={
@@ -606,33 +643,26 @@ def create_layout(app):
                                         config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
 
                                     ),
-                                    html.P(html.A("Source: CEIC. Last Updated Date: 2016", href='https://www.ceicdata.com/en/mozambique/land-use-protected-areas-and-national-wealth/mz-total-natural-resources-rents--of-gdp', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                            html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                            html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                            html.A("Source: CEIC. Last Updated Date: 2016", href='https://www.ceicdata.com/en/mozambique/land-use-protected-areas-and-national-wealth/mz-total-natural-resources-rents--of-gdp', target="_blank", style={"font-size": "10px", "color": "#888"})
+                                    ]),
                                 ],
                                 className="six columns",
                             ),
-                            
-                            ###### Chart 5 ###########
-                            
-
                         ],
-                        className="row ",
+                        className="row",
                         style={"margin-bottom": "20px"},
+                        id = "row4",
                     ), ######### Closing DIV ######### 
 
-                    # Row 7 Repetition
-
-                    # html.H6("Quarterly Reported Indicators", style={'margin-top': '0', 'margin-bottom': '0'}), # Header above Horizontal Line
-                    # html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
-
-
+                    ## Row5 ##
                     html.Div(
                         [   ###### Central Govenment debt, total (% of GDP) ###########
                             html.Div(
                                 [
-                                    html.H6(
-                                        "Central government debt, total (% of GDP) - Mozambique", 
-                                        className="subtitle padded",
-                                    ),
+                                    html.H6("Central government debt, total (% of GDP) - Mozambique", className="subtitle padded"),
                                     dcc.Graph(
                                         id="graph-8",
                                         figure={
@@ -674,7 +704,11 @@ def create_layout(app):
                                         config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
 
                                     ),
-                                    html.P(html.A("Source: The World Bank. Last Updated Date: 2021.", href='https://data.worldbank.org/indicator/GC.DOD.TOTL.GD.ZS?end=2021&locations=MZ&start=2016&view=chart', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                            html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                            html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                            html.A("Source: The World Bank. Last Updated Date: 2021.", href='https://data.worldbank.org/indicator/GC.DOD.TOTL.GD.ZS?end=2021&locations=MZ&start=2016&view=chart', target="_blank", style={"font-size": "10px", "color": "#888"})
+                                    ]),
                                 ],
                                 className="six columns",
                             ),
@@ -682,10 +716,7 @@ def create_layout(app):
                             ###### Red List Index ###########
                             html.Div(
                                 [
-                                    html.H6(
-                                        "Red List Index",
-                                        className="subtitle padded",
-                                    ),
+                                    html.H6("Red List Index", className="subtitle padded"),
                                     dcc.Graph(
                                         id="graph-CPI",
                                         figure={
@@ -760,7 +791,11 @@ def create_layout(app):
                                         },
                                         config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
                                     ),
-                                    html.P(html.A("Source: Red List Index, 1993 to 2022 (ourworldindata.org)", href='https://ourworldindata.org/grapher/red-list-index?tab=chart&country=~MOZ', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                            html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                            html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                            html.A("Source: Red List Index, 1993 to 2022 (ourworldindata.org)", href='https://ourworldindata.org/grapher/red-list-index?tab=chart&country=~MOZ', target="_blank", style={"font-size": "10px", "color": "#888"})
+                                    ]),
         
                                 ],
 
@@ -768,178 +803,12 @@ def create_layout(app):
                             ),                            
                         ],
                         className="row ",
+                        id = "row5",
                     ), ######### Closing DIV ######### 
 
                     #####
                     # html.H6("Quarterly Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
                     # html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
-
-                    #####
-                    # html.Div(
-                    #     [
-                    #         html.Div(
-                    #             [
-                    #                 html.H6("Indicator 10", className="subtitle padded"),
-                    #                 dcc.Graph(
-                    #                     id="graph-4",
-                    #                     figure={
-                    #                         "data": [
-                    #                             go.Scatter(
-                    #                                 #x=df_graph["Date"],
-                    #                                 #y=df_graph["Calibre Index Fund"],
-                    #                                 line={"color": "#97151c"},
-                    #                                 mode="lines",
-                    #                                 name="Calibre Index Fund",
-                    #                             ),
-                    #                             go.Scatter(
-                    #                                 #x=df_graph["Date"],
-                    #                                 # y=df_graph[
-                    #                                 #     "MSCI EAFE Index Fund (ETF)"
-                    #                                 # ],
-                    #                                 line={"color": "#b5b5b5"},
-                    #                                 mode="lines",
-                    #                                 name="MSCI EAFE Index Fund (ETF)",
-                    #                             ),
-                    #                         ],
-                    #                         "layout": go.Layout(
-                    #                             autosize=True,
-                    #                             width=340,
-                    #                             height=200,
-                    #                             font={"family": "Raleway", "size": 10},
-                    #                             margin={
-                    #                                 "r": 30,
-                    #                                 "t": 30,
-                    #                                 "b": 30,
-                    #                                 "l": 30,
-                    #                             },
-                    #                             showlegend=True,
-                    #                             titlefont={
-                    #                                 "family": "Raleway",
-                    #                                 "size": 10,
-                    #                             },
-                    #                             xaxis={
-                    #                                 "autorange": True,
-                    #                                 "range": [
-                    #                                     "2007-12-31",
-                    #                                     "2018-03-06",
-                    #                                 ],
-                    #                                 "rangeselector": {
-                    #                                     "buttons": [
-                    #                                         {
-                    #                                             "count": 1,
-                    #                                             "label": "1Y",
-                    #                                             "step": "year",
-                    #                                             "stepmode": "backward",
-                    #                                         },
-                    #                                         {
-                    #                                             "count": 3,
-                    #                                             "label": "3Y",
-                    #                                             "step": "year",
-                    #                                             "stepmode": "backward",
-                    #                                         },
-                    #                                         {
-                    #                                             "count": 5,
-                    #                                             "label": "5Y",
-                    #                                             "step": "year",
-                    #                                         },
-                    #                                         {
-                    #                                             "count": 10,
-                    #                                             "label": "10Y",
-                    #                                             "step": "year",
-                    #                                             "stepmode": "backward",
-                    #                                         },
-                    #                                         {
-                    #                                             "label": "All",
-                    #                                             "step": "all",
-                    #                                         },
-                    #                                     ]
-                    #                                 },
-                    #                                 "showline": True,
-                    #                                 "type": "date",
-                    #                                 "zeroline": False,
-                    #                             },
-                    #                             yaxis={
-                    #                                 "autorange": True,
-                    #                                 "range": [
-                    #                                     18.6880162434,
-                    #                                     278.431996757,
-                    #                                 ],
-                    #                                 "showline": True,
-                    #                                 "type": "linear",
-                    #                                 "zeroline": False,
-                    #                             },
-                    #                         ),
-                    #                     },
-                    #                     config={"displayModeBar": False},
-                    #                 ),
-                    #             ],
-                    #             className="twelve columns",
-                    #         )
-                    #     ],
-                    #     className="row ",
-                    # ),
-                    # # Row 3
-                    # html.Div(
-                    #     [
-                    #         html.Div(
-                    #             [
-                    #                 html.H6(
-                    #                     [
-                    #                         "Indicator 11"
-                    #                     ],
-                    #                     className="subtitle padded",
-                    #                 ),
-                    #             ],
-                    #             className="twelve columns",
-                    #         )
-                    #     ],
-                    #     className="row ",
-                    # ),
-                    # # Row 4
-                    # html.Div(
-                    #     [
-                    #         html.Div(
-                    #             [
-                    #                 html.H6(
-                    #                     [
-                    #                         "Indicator 12"
-                    #                     ],
-                    #                     className="subtitle padded",
-                    #                 ),
-                    #                 html.Div(
-                    #                     [
-                    #                         # html.Table(
-                    #                         #     make_dash_table(df_after_tax),
-                    #                         #     className="tiny-header",
-                    #                         # )
-                    #                     ],
-                    #                     style={"overflow-x": "auto"},
-                    #                 ),
-                    #             ],
-                    #             className=" twelve columns",
-                    #         )
-                    #     ],
-                    #     className="row ",
-                    # ),
-                    # # Row 5
-                    # html.Div(
-                    #     [
-                    #         html.Div(
-                    #             [
-                    #                 html.H6(
-                    #                     ["Indicator 13"],
-                    #                     className="subtitle padded",
-                    #                 ),
-                    #                 # html.Table(
-                    #                 #     make_dash_table(df_recent_returns),
-                    #                 #     className="tiny-header",
-                    #                 # ),
-                    #             ],
-                    #             className=" twelve columns",
-                    #         )
-                    #     ],
-                    #     className="row ",
-                    # ),
 
                     html.H6("Montly Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
                     html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
@@ -1042,106 +911,18 @@ def create_layout(app):
                                         
                                         config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
                                     ),
-                                    html.P(html.A("Source: International Monetary Fund (IMF). Last Updated Date: August, 31st 2023.", href='https://www.economy.com/mozambique/consumer-price-index-cpi', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                            html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                            html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                            html.A("Source: International Monetary Fund (IMF). Last Updated Date: August, 31st 2023.", href='https://www.economy.com/mozambique/consumer-price-index-cpi', target="_blank", style={"font-size": "10px", "color": "#888"})
+                                    ]),
         
                                 ],
-
                                 className="six columns",
+                                id = "cpi",
                             ),
-                          
-                            ###### Chart 5 ###########
-                            # html.Div(
-                            #     [
-                            #         # html.H6(
-                            #         #     "Red List Index",
-                            #         #     className="subtitle padded",
-                            #         # ),
-                            #         # dcc.Graph(
-                            #         #     id="graph-CPI",
-                            #         #     figure={
-                            #         #         "data": [
-                            #         #             # go.Bar(
-                            #         #             #     x=xAxisLabels,
-                            #         #             #     y=secondYAxis,
-                            #         #             #     marker={
-                            #         #             #         "color": "#97151c",
-                            #         #             #         # "line": {
-                            #         #             #         #     "color": "rgb(255, 255, 255)",
-                            #         #             #         #     "width": 2,
-                            #         #             #         # },
-                            #         #             #     },
-                            #         #             #     name="Consumer Price Index",
-                            #         #             # ),
-                            #         #             go.Scatter(
-                            #         #                 x=rl_mozambique_data['Year'],
-                            #         #                 y=rl_mozambique_data['15.5.1 - Red List Index - ER_RSK_LST'],
-                            #         #                 mode='lines+markers',
-                            #         #                 marker={
-                            #         #                     "color": "#97151c",
-                            #         #                     "line": {
-                            #         #                         "color": "rgb(255, 255, 255)",
-                            #         #                         "width": 2,
-                            #         #                     },
-                            #         #                 },
-                            #         #                 name="% Change",
-                            #         #             ),
-                            #         #         ],
-                            #         #         "layout": go.Layout(
-                            #         #             autosize=False,
-                            #         #             #bargap=0.35,
-                            #         #             font={"family": "Raleway", "size": 10},
-                            #         #             height=250,
-                            #         #             hovermode="closest",
-                            #         #             # legend={
-                            #         #             #     "x": -0.0228945952895,
-                            #         #             #     "y": -0.189563896463,
-                            #         #             #     "orientation": "h",
-                            #         #             #     "yanchor": "top",
-                            #         #             # },
-                            #         #             margin={
-                            #         #                 "r": 10,
-                            #         #                 "t": 20,
-                            #         #                 "b": 30,
-                            #         #                 "l": 20,
-                            #         #             },
-                            #         #             showlegend=False,
-                            #         #             title="",
-                            #         #             width=330,
-                            #         #             # xaxis_title='Date',
-                            #         #             # yaxis_title='Value',
-                                                
-                            #         #             xaxis={
-                            #         #                 "autorange": True,
-                            #         #                 "range": [-0.5, 4.5],
-                            #         #                 "showline": False,
-                            #         #                 "title": "",
-                            #         #                 "type": "category",
-                            #         #             },
-                            #         #             yaxis={
-                            #         #                 "autorange": True,
-                            #         #                 "range": [0, 22.9789473684],
-                            #         #                 "showgrid": True,
-                            #         #                 "showline": False,
-                            #         #                 "title": "",
-                            #         #                 "type": "linear",
-                            #         #                 "zeroline": False,
-                            #         #             },
-                            #         #         ),
-                            #         #     },
-                            #         #     config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
-                            #         # ),
-                            #         # html.P(html.A("Source: Red List Index, 1993 to 2022 (ourworldindata.org)", href='https://ourworldindata.org/grapher/red-list-index?tab=chart&country=~MOZ', target="_blank", style={"font-size": "10px", "color": "#888"})),
-        
-                            #     ],
-
-                            #     className="six columns",
-                            # ),
-                            
-                            ###### Chart 5 ###########
-                            
-
                         ],
-                        className="row ",
+                        className = "row ",
                     ),
 
                 ],
@@ -1151,7 +932,7 @@ def create_layout(app):
             ),
         ],
         className="page",
-
+        id = "top",
 
     )
 

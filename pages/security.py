@@ -24,7 +24,7 @@ mExp_values = list(mozambique_data.values[0][0:])
 #Murder/Homicide Rate Data
 file_path = Path(__file__).parent.parent / 'data' / '6.security' / 'homicideRate' / 'homicideRate.xlsx'
 df_homRt = pd.read_excel(file_path)
-#print(df_homRt)
+#print(df_homRt),
 #Armed forces
 file_path = Path(__file__).parent.parent / 'data' / '6.security' / 'armedForces.xlsx'
 df_armedForces = pd.read_excel(file_path)
@@ -237,7 +237,7 @@ def create_layout(app):
                                                     },
                                                     yaxis2={
                                                         "autorange": False,
-                                                        "range": [-30, 10],
+                                                        "range": [-0.3, 0.1],
                                                         "showgrid": False,
                                                         "showline": False,
                                                         "title": "",
