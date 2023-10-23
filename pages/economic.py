@@ -12,6 +12,7 @@ import pandas as pd
 from pathlib import Path
 from geopandas import GeoDataFrame # Added by @MGB
 import matplotlib.pyplot as plt # Added by @MGB
+import math
 
 # Import libraries to print as PDF
 # #import dash_daq as daq
@@ -43,7 +44,10 @@ mozambique_data = df_debt[df_debt['Country Name'] == 'Mozambique']
 # Extract the years and GDP values from the dataframe
 years_debt = list(mozambique_data.columns[59:])
 debt_values = list(mozambique_data.values[0][59:])
+#debt_values_n = (value / 100 if not math.isnan(value) else float('nan') for value in debt_values_n)
 # 2 ###### END Load the debt data  ##################################################
+
+#print(debt_values)
 
 # 2 ####### Load the natural resources data  ##################################################
 # Load nr data from the CSV file
@@ -51,6 +55,9 @@ debt_values = list(mozambique_data.values[0][59:])
 rl_file_path = Path(__file__).parent.parent / 'data' / '1.economic' / 'naturalResources' / 'natResourcesRent_pct_GDP.csv'
 # Reading csv file
 df_nrList = pd.read_csv(rl_file_path, skiprows=0)
+df_nrList_y = [value / 100 for value in df_nrList['Data']]
+
+#print(df_nrList_y)
 
 # 2 ####### Load the redList data  ##################################################
 # Load rl data from the CSV file
@@ -88,7 +95,8 @@ df_gdp3 = pd.read_csv(gdp3_file_path, skiprows=3)
 mozambique_data = df_gdp3[df_gdp3['Country Name'] == 'Mozambique']
 # Extract the years and GDP values from the dataframe
 years_gdp3 = list(mozambique_data.columns[24:])
-gdp3_values = list(mozambique_data.values[0][24:])
+gdp3_values_n = list(mozambique_data.values[0][24:])
+gdp3_values = [value / 100 for value in gdp3_values_n]
 # 3 ###### END Load GDP growth (annual %) ####################################################
 
 # 4 ###### Inflation, Consumer Prices ####################################################
@@ -101,7 +109,8 @@ df_inflation = pd.read_csv(inflation_file_path, skiprows=3)
 mozambique_data = df_inflation[df_inflation['Country Name'] == 'Mozambique']
 # Extract the years and inflation values from the dataframe
 years_inflation = list(mozambique_data.columns[49:])
-inflation_values = list(mozambique_data.values[0][49:])
+inflation_values_n = list(mozambique_data.values[0][49:])
+inflation_values = [value /100 for value in inflation_values_n]
 # 4 ###### Inflation, Consumer Prices ####################################################
 
 # 5 ###### START Load youth unemployment ####################################################
@@ -114,12 +123,11 @@ df_yunemployment = pd.read_csv(yunemployment_file_path, skiprows=3)
 mozambique_data = df_yunemployment[df_yunemployment['Country Name'] == 'Mozambique']
 # Extract the years and youth unemployment values from the dataframe
 years_yunemployment = list(mozambique_data.columns[34:])
-yunemployment_values = list(mozambique_data.values[0][34:])
+yunemployment_values_n = list(mozambique_data.values[0][34:])
+yunemployment_values = [value/100 for value in yunemployment_values_n]
 # 5 ###### END Load youth unemployment ####################################################
 
 # 6 ###### START Consumer Price Index (CPI) #####################################################
-# commented by rj cpi = pd.read_json(DATA_PATH.joinpath("mozambique_acute_food_insecurity_november_2022.json")) #
-# Get the path to the 'data' directory relative to the current script's location
 cpi_file_path = Path(__file__).parent.parent / 'data' / '1.economic' / 'cpi' / 'cpi.json'
 # Open the GeoJSON data
 with open(cpi_file_path) as f:
@@ -129,44 +137,6 @@ with open(cpi_file_path) as f:
 xAxisLabels = data_cpi['xAxisLabels']
 firstYAxis = data_cpi['firstYAxis']['values']
 secondYAxis = data_cpi['secondYAxis']['values']
-
-# # Flatten the nested structure in the JSON data using json_normalize
-# #df_cpi = pd.json_normalize(data_cpi)
-# # Extract the 'data' part of the JSON
-# data_x = data_cpi['xAxisLabels']
-
-# # Create a DataFrame from the flattened data
-# xAxisLabels = pd.DataFrame(data_x)
-
-# # Display the resulting DataFrame
-# #print(xAxisLabels)
-
-# #######
-# # Extract the 'data' part of the JSON
-# data_y1 = data_cpi['firstYAxis']
-# data_y1 = data_y1['values']
-# firstYAxis = pd.DataFrame(data_y1)
-
-# # Display the resulting DataFrame
-# #print(firstYAxis)
-
-
-# #######
-# # Extract the 'data' part of the JSON
-# data_y2 = data_cpi['secondYAxis']
-# data_y2 = data_y2['values']
-# secondYAxis = pd.DataFrame(data_y2)
-
-# # Display the resulting DataFrame
-# #print(secondYAxis)
-
-# 6 ###### END Consumer Price Index (CPI) ####################################################
-
-
-#  ####### Load the GeoJSON data for FOOD INSECURITY #####################################
-
-# Replace 'your_file_path.json' with the actual file path of your JSON file.
-#file_path = r'Z:\Private\miguel.bambo\datascience\Dash\mais\data\1.economic\food_insecurity\Mozambique-Acute Food Insecurity November 2022.json'
 
 # Get the path to the 'data' directory relative to the current script's location
 gdf_file_path = Path(__file__).parent.parent / 'data' / '1.economic' / 'food_insecurity' / 'Mozambique-Acute Food Insecurity November 2022.json'
@@ -254,26 +224,26 @@ def create_layout(app):
                     html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
                     html.Br([]),
                     html.P(html.A("Levels and location of food insecurity", href='#food-insecurity', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
-                    html.P(html.A("Fragile States Index", style={"font-size": "10px", "color": "#888"})),
+                    html.P("Fragile States Index", style={"font-size": "10px", "color": "#888"}),
                     html.P(html.A("Gross Domestic Product (GDP) and GDP growth rate", href='#row2', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
                     html.P(html.A("Inflation rate", href='#row3', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
                     html.P(html.A("Youth Unemployment rate", href='#row4', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
-                    html.P(html.A("Poverty rate and income distribution/Gini Index", style={"font-size": "10px", "color": "#888"})),
-                    html.P(html.A("Foreign direct investment (FDI) inflows", style={"font-size": "10px", "color": "#888"})),
-                    html.P(html.A("Trade balance and export/import levels", style={"font-size": "10px", "color": "#888"})),
+                    html.P("Poverty rate and income distribution/Gini Index", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Foreign direct investment (FDI) inflows", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Trade balance and export/import levels", style={"font-size": "10px", "color": "#888"}),
                     html.P(html.A("Government debt and fiscal deficit", href='#row5', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
                     html.P(html.A("Red List Index", href='#row5', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
                     html.P(html.A("Natural Resources revenues", href='#row4', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
-                    html.P(html.A("Poverty rate and income", style={"font-size": "10px", "color": "#888"})),
+                    html.P("Poverty rate and income", style={"font-size": "10px", "color": "#888"}),
                     html.P(html.A("Consumer Price Index (CPI)", href='#cpi', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
-                    html.P(html.A("Government revenues", style={"font-size": "10px", "color": "#888"})),
-                    html.P(html.A("Government expenditure", style={"font-size": "10px", "color": "#888"})),
-                    html.P(html.A("Debt servicing", style={"font-size": "10px", "color": "#888"})),
-                    html.P(html.A("Exchange rate", style={"font-size": "10px", "color": "#888"})),
-                    html.P(html.A("Net international reserves", style={"font-size": "10px", "color": "#888"})),
-                    html.P(html.A("Interest rates/ MIMO rate", style={"font-size": "10px", "color": "#888"})),
-                    html.P(html.A("Employment and unemployment rate", style={"font-size": "10px", "color": "#888"})),
-                    html.P(html.A("The ability of the country/economy to create jobs", style={"font-size": "10px", "color": "#888"})),
+                    html.P("Government revenues", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Government expenditure", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Debt servicing", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Exchange rate", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Net international reserves", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Interest rates/ MIMO rate", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Employment and unemployment rate", style={"font-size": "10px", "color": "#888"}),
+                    html.P("The ability of the country/economy to create jobs", style={"font-size": "10px", "color": "#888"}),
                     html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin                   
 
                     html.Br([]),html.Br([]),
@@ -439,8 +409,6 @@ def create_layout(app):
                                                     mode='lines',
                                                     marker=dict(size=8),
                                                     line={"color": "#97151c"},
-                                        #             mode="lines",
-                                        #             name="Calibre Index Fund Inv",                                                   
                                                 ),
                                             ],
                                          "layout": go.Layout(
@@ -456,6 +424,14 @@ def create_layout(app):
                                                 #     "orientation": "h",
                                                 #     "yanchor": "top",
                                                 # },
+                                                                                                yaxis={
+                                                    "autorange": True,
+                                                    "showline": False,
+                                                    "type": "linear",
+                                                    "zeroline": False,
+                                                    "tickformat": ".0%",
+                                                    "title": "",
+                                                    },
                                                 margin={
                                                     "r": 20,
                                                     "t": 20,
@@ -500,25 +476,30 @@ def create_layout(app):
                                         #             name="Calibre Index Fund Inv",                                                   
                                                 ),
                                             ],
-                                         "layout": go.Layout(
+                                            
+                                         "layout": 
+                                                go.Layout(
                                                 autosize=True,
                                                 bargap=0.35,
                                                 font={"family": "Raleway", "size": 10},
                                                 height=200,
                                                 width=340,
                                                 hovermode="closest",
-                                                # legend={
-                                                #     "x": -0.0228945952895,
-                                                #     "y": -0.189563896463,
-                                                #     "orientation": "h",
-                                                #     "yanchor": "top",
-                                                # },
                                                 margin={
                                                     "r": 10,
                                                     "t": 20,
                                                     "b": 20,
-                                                    "l": 10,
+                                                    "l": 20,
                                                 },
+                                                yaxis={
+                                                    "autorange": True,
+                                                    "showline": False,
+                                                    "type": "linear",
+                                                    "zeroline": False,
+                                                    "tickformat": ".0%",
+                                                    "title": "",
+                                                    },
+
                                                 #showlegend=True,
                                                 title="",
                                              
@@ -569,6 +550,14 @@ def create_layout(app):
                                                 height=200,
                                                 width=340,
                                                 hovermode="closest",
+                                                yaxis={
+                                                    "autorange": True,
+                                                    "showline": False,
+                                                    "type": "linear",
+                                                    "zeroline": False,
+                                                    "tickformat": ".0%",
+                                                    "title": "",
+                                                    },
                                                 # legend={
                                                 #     "x": -0.0228945952895,
                                                 #     "y": -0.189563896463,
@@ -608,7 +597,7 @@ def create_layout(app):
                                             "data": [
                                                 go.Scatter(
                                                     x=df_nrList['Year'],
-                                                    y=df_nrList['Data'],
+                                                    y=df_nrList_y,
                                                     mode='lines',
                                                     marker=dict(size=8),
                                                     line={"color": "#97151c"},
@@ -637,7 +626,14 @@ def create_layout(app):
                                                 },
                                                 #showlegend=True,
                                                 title="",
-                                             
+                                                yaxis={
+                                                    "autorange": True,
+                                                    "showline": False,
+                                                    "type": "linear",
+                                                    "zeroline": False,
+                                                    "tickformat": ".0%",
+                                                    "title": "",
+                                                    },
                                             ),
                                         },
                                         config={"displayModeBar": True, "displaylogo": False},  # Enable the display mode bar and hide the logo
@@ -698,6 +694,14 @@ def create_layout(app):
                                                 },
                                                 #showlegend=True,
                                                 title="",
+                                                yaxis={
+                                                    "autorange": True,
+                                                    "showline": False,
+                                                    "type": "linear",
+                                                    "zeroline": False,
+                                                    #"tickformat": ".0%",
+                                                    "title": "",
+                                                    },
                                              
                                             ),
                                         },
@@ -965,14 +969,12 @@ def update_map(clickData):
             showscale=False
         ))
 
-
-
-    fig.update_layout(mapbox_style="carto-positron", #The valid options for mapbox_style are: "open-street-map", "white-bg", "carto-positron", "carto-darkmatter", "stamen-terrain", "stamen-toner", and "stamen-watercolor"
-                        mapbox_zoom=3.5,
-                        mapbox_center={"lat": -18.665695, "lon": 35.529562},
-                        mapbox_layers=[]  # Hide default base map layers
-                        )
-
+    fig.update_layout(
+        mapbox_style="carto-positron", #The valid options for mapbox_style are: "open-street-map", "white-bg", "carto-positron", "carto-darkmatter", "stamen-terrain", "stamen-toner", and "stamen-watercolor"
+        mapbox_zoom=4.0,
+        mapbox_center={"lat": -18.665695, "lon": 35.529562},
+        mapbox_layers=[]  # Hide default base map layers
+    )
 # Add legend using annotations with a gray background
     legend_text = "<br>".join([f"<b><span style='color:{phase_colors[phase]}'>{phase_labels[phase]}</span></b>" for phase in phase_colors.keys()])
     fig.add_annotation(go.layout.Annotation(
@@ -987,179 +989,6 @@ def update_map(clickData):
         bordercolor='gray',
         borderwidth=0.05,
         align='left',
-        # missing_kwds={
-        # "color": "lightgrey",
-        # "edgecolor": "red",
-        # "hatch": "///",
-        # "label": "Missing values",
-        # }
-        #margin=dict(r=0, #t=20, b=0
-                    #)
         ))
-
     fig.update_layout(margin=dict(l=0, r=120, t=20, b=0))  # Adjust the right margin to accommodate the legend
     return fig
-
-# Customize the layout of the bar 
-#graph_CPI.update_layout(     title='Bar Chart',     xaxis_title='Date',     yaxis_title='Value',     showlegend=True) 
-
- 
-
-# Customize the layout of the line 
-#chartline_chart.update_layout(     title='Line Chart',     xaxis_title='Date',     yaxis_title='Value',     showlegend=True)
-
-
-    # START Putting Printing button as PDF
-    # # Access the rendered HTML
-    # rendered_html = DashRenderer(requests_pathname='/', requests_params='').response()
-
-    # # Convert the rendered HTML to PDF
-    # pdf = HTML(string=rendered_html.content).write_pdf("output.pdf")
-    # END Putting Printing button as PDF
-
-
-    ### START Show missing Data ##################################
-    #     # Convert the GeoDataFrame to GeoDataFrame
-    # gdf['color'] = gdf['overall_phase_C'].map(phase_colors)
-
-    # # Plot the GeoDataFrame with assigned colors
-    # ax = gdf.plot(column='color', figsize=(20, 20), missing_kwds={
-    #     "color": "lightgrey",
-    #     "edgecolor": "red",
-    #     "hatch": "///",
-    #     "label": "Missing values",
-    # })
-    # ax.axis('off')
-    # #plt.show()
-    ### END Show missing Data ##################################
-    
-        #return fig
-
-###### UPDATING MAPS ####################################################################
-
-#########################################################################################
-###### ENDING UPDATING CHOROPLETH MAP GeoJSON data for FOOD INSECURITY ###################################################
-#########################################################################################
-
-#########################################################################################
-###### UPDATING GDP (current US$) MAP ###################################################
-#########################################################################################
-
-# # Define the callback for the Graph-2 ScatterPlot CHART
-# @app.callback(
-#     Output('graph-2', 'figure'),
-#     #Input('graph-2', 'clickData')
-# )
-
-# # Function to update graph-2 with GDP data
-# def update_graph_2():
-
-
-
-#     fig = go.Figure()
-    
-#     fig.add_trace(go.Scatter(
-#         x=years,
-#         y=gdp_values,
-#         line={"color": "#97151c"},
-#         mode="lines",
-#         name="GDP (current US$)",
-#         # x=years,
-#         # y=gdp_values,
-#         # line={"color": "#97151c"},
-#         # mode="lines",
-#         # name="GDP (current US$)",
-#     ))
-    
-#     fig.update_layout(
-#         autosize=True,
-#         title="",
-#         font={"family": "Raleway", "size": 10},
-#         height=200,
-#         width=340,
-#         hovermode="closest",
-#         legend={
-#             "x": -0.0277108433735,
-#             "y": -0.142606516291,
-#             "orientation": "h",
-#         },
-#         margin={
-#             "r": 20,
-#             "t": 20,
-#             "b": 20,
-#             "l": 50,
-#         },
-#         showlegend=True,
-#         xaxis={
-#             "autorange": True,
-#             "linecolor": "rgb(0, 0, 0)",
-#             "linewidth": 1,
-#             "showgrid": False,
-#             "showline": True,
-#             "title": "",
-#             "type": "linear",
-#         },
-#         yaxis={
-#             "autorange": False,
-#             "gridcolor": "rgba(127, 127, 127, 0.2)",
-#             "mirror": False,
-#             "nticks": 4,
-#             "showgrid": True,
-#             "showline": True,
-#             "ticklen": 10,
-#             "ticks": "outside",
-#             "title": "GDP (current US$)",
-#             "type": "linear",
-#             "zeroline": False,
-#             "zerolinewidth": 4,
-#         },
-#         # autosize=True,
-#         # title="",
-#         # font={"family": "Raleway", "size": 10},
-#         # height=200,
-#         # width=340,
-#         # hovermode="closest",
-#         # legend={
-#         #     "x": -0.0277108433735,
-#         #     "y": -0.142606516291,
-#         #     "orientation": "h",
-#         # },
-#         # margin={
-#         #     "r": 20,
-#         #     "t": 20,
-#         #     "b": 20,
-#         #     "l": 50,
-#         # },
-#         # showlegend=True,
-#         # xaxis={
-#         #     "autorange": True,
-#         #     "linecolor": "rgb(0, 0, 0)",
-#         #     "linewidth": 1,
-#         #     #"range": [df_gdp['Year'].min(), df_gdp['Year'].max()],
-#         #     "showgrid": False,
-#         #     "showline": True,
-#         #     "title": "",
-#         #     "type": "linear",
-#         # },
-#         # yaxis={
-#         #     "autorange": False,
-#         #     "gridcolor": "rgba(127, 127, 127, 0.2)",
-#         #     "mirror": False,
-#         #     "nticks": 4,
-#         #     #"range": [0, df_gdp['GDP (current US$)'].max() * 1.1],  # Adjust the range to have some margin at the top
-#         #     "showgrid": True,
-#         #     "showline": True,
-#         #     "ticklen": 10,
-#         #     "ticks": "outside",
-#         #     "title": "GDP (current US$)",
-#         #     "type": "linear",
-#         #     "zeroline": False,
-#         #     "zerolinewidth": 4,
-#         # },
-#     )
-    
-#     return fig
-
-#########################################################################################
-###### ENDING UPDATING GDP (current US$) MAP ############################################
-#########################################################################################

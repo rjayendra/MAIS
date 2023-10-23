@@ -25,6 +25,16 @@ def create_layout(app):
             # page 2
             html.Div(
                 [
+                    html.H6("List of Environmental Indicators", style={'margin-bottom': '0'}),
+                    html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
+                    html.Br([]),
+                    html.P("Number of climate events", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Key actions for climate change mitigation", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Infrastructures destroyed by climate events and conflicts", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Resilient infrastructure construction", style={"font-size": "10px", "color": "#888"}),
+                    html.P(html.A("Access to sustainable energy", href='#row1', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Carbon emissions and air quality", href='#row1', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.Br([]),html.Br([]),
                     html.H6("Annually Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
                     html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
                     # Row 1
@@ -263,6 +273,7 @@ def create_layout(app):
 
                         ],
                                 className="row",
+                                id="row1"
                     ),
                     # Row 2
                     # html.Div(

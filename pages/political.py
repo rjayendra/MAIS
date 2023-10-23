@@ -25,12 +25,26 @@ df_democratic_culture_index = pd.read_excel(file_path, sheet_name='democratic_cu
 def create_layout(app):
     return html.Div(
         [
-            Header(app),
-            # page 2
+            Header(app),            
             html.Div(
                 [
+                    html.H6("List of Political Indicators", style={'margin-bottom': '0'}),
+                    html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
+                    html.Br([]),
+                    html.P(html.A("Political stability and governance", href='#row1', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Rule of law", href='#row2', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("corruption perception (index)", href='#row1', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P("Electoral processes and political rights", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Freedom of speech and media freedom", style={"font-size": "10px", "color": "#888"}),
+                    html.P(html.A("Democracy Index", href="#row2", style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Democratic culture index", href="#row3", style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Civil liberties Index and human rights", href="#row3", style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P("Political Rights Index", style={"font-size": "10px", "color": "#888"}),
+                    html.Br([]),html.Br([]),
                     html.H6("Annually Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
                     html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
+                    # html.H6("Annually Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
+                    # html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
                     # Row 1
                     html.Div(
                         [
@@ -129,7 +143,11 @@ def create_layout(app):
                                             },
                                             config={"displayModeBar": False},
                                         ),
-                                        html.P(html.A("Source: ceicdata", href='https://www.ceicdata.com/en/mozambique/country-governance-indicators', target="_blank", style={"font-size": "10px", "color": "#888"})),                                        
+                                    html.P([
+                                        html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                        html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                        html.A("Source: ceicdata", href='https://www.ceicdata.com/en/mozambique/country-governance-indicators', target="_blank", style={"font-size": "10px", "color": "#888"}),
+                                    ]),                                        
                                 ],
                                         className = "six columns",
                             ),
@@ -231,14 +249,19 @@ def create_layout(app):
                                             },
                                             config={"displayModeBar": False},
                                         ),
-                                        html.P(html.A("Source: Trading Economics", href='https://tradingeconomics.com/mozambique/corruption-index', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                        html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                        html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                        html.A("Source: Trading Economics", href='https://tradingeconomics.com/mozambique/corruption-index', target="_blank", style={"font-size": "10px", "color": "#888"}),
+                                    ]),
 
                                 ],
                                     className="six columns"
                             ),
 
                         ],
-                                className="row",
+                        className="row",
+                        id="row1",
                     ),
                     # Row 2
                     html.Div(
@@ -255,6 +278,7 @@ def create_layout(app):
                                                     y=df_democracy_index["value"],
                                                     line={"color": "#97151c"},
                                                     mode="lines+markers",
+                                                    marker=dict(size=3),
                                                     name="Calibre Index Fund",
                                                 ),
                                             ],
@@ -329,7 +353,11 @@ def create_layout(app):
                                         },
                                         config={"displayModeBar": False},
                                     ),
-                                    html.P(html.A("Source: https://ourworldindata.org", href='https://ourworldindata.org/grapher/democracy-index-eiu?tab=chart&country=MOZ', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                        html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                        html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                        html.A("Source: https://ourworldindata.org", href='https://ourworldindata.org/grapher/democracy-index-eiu?tab=chart&country=MOZ', target="_blank", style={"font-size": "10px", "color": "#888"}),
+                                    ]),
                                 ],
                                     className="six columns",
                             ),
@@ -345,6 +373,7 @@ def create_layout(app):
                                                     y=df_rule_of_law["value"],
                                                     line={"color": "#97151c"},
                                                     mode="lines+markers",
+                                                    marker=dict(size=3),
                                                     name="Calibre Index Fund",
                                                 ),
                                             ],
@@ -419,12 +448,17 @@ def create_layout(app):
                                         },
                                         config={"displayModeBar": False},
                                     ),
-                                    html.P(html.A("Source: https://data.worldbank.org", href='https://data.worldbank.org/indicator/RL.EST?end=2021&locations=MZ&start=1996&view=chart', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                        html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                        html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                        html.A("Source: https://data.worldbank.org", href='https://data.worldbank.org/indicator/RL.EST?end=2021&locations=MZ&start=1996&view=chart', target="_blank", style={"font-size": "10px", "color": "#888"}),
+                                    ])
                                 ],
                                     className="six columns",
                             ),                            
                         ],
                         className="row ",
+                        id="row2",
                     ),
                     # Row 3
                     html.Div(
@@ -441,6 +475,7 @@ def create_layout(app):
                                                     y=df_democratic_culture_index["value"],
                                                     line={"color": "#97151c"},
                                                     mode="lines+markers",
+                                                    marker=dict(size=3),
                                                     name="Calibre Index Fund",
                                                 ),
                                             ],
@@ -515,7 +550,11 @@ def create_layout(app):
                                         },
                                         config={"displayModeBar": False},
                                     ),
-                                    html.P(html.A("Source: https://ourworldindata.org", href='https://ourworldindata.org/grapher/democratic-culture-index-eiu?tab=chart&country=MOZ', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                        html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                        html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                        html.A("Source: https://ourworldindata.org", href='https://ourworldindata.org/grapher/democratic-culture-index-eiu?tab=chart&country=MOZ', target="_blank", style={"font-size": "10px", "color": "#888"}),
+                                ])
                                 ],
                                     className="six columns",
                             ),
@@ -531,6 +570,7 @@ def create_layout(app):
                                                     y=df_civil_liberties_index["value"],
                                                     line={"color": "#97151c"},
                                                     mode="lines+markers",
+                                                    marker=dict(size=3),
                                                     name="Calibre Index Fund",
                                                 ),
                                             ],
@@ -605,61 +645,22 @@ def create_layout(app):
                                         },
                                         config={"displayModeBar": False},
                                     ),
-                                    html.P(html.A("Source: https://ourworldindata.org", href='https://ourworldindata.org/grapher/civil-liberties-index-eiu?tab=chart&country=MOZ', target="_blank", style={"font-size": "10px", "color": "#888"})),
+                                    html.P([
+                                        html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                        html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                        html.A("Source: https://ourworldindata.org", href='https://ourworldindata.org/grapher/civil-liberties-index-eiu?tab=chart&country=MOZ', target="_blank", style={"font-size": "10px", "color": "#888"}),
+                                    ]),
                                 ],
                                     className="six columns",
                             ),                            
                         ],
                         className="row ",
-                    ),
-                    # Row 4
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H6(
-                                        [
-                                            "Indicator 5"
-                                        ],
-                                        className="subtitle padded",
-                                    ),
-                                    html.Div(
-                                        [
-                                            # html.Table(
-                                            #     make_dash_table(df_after_tax),
-                                            #     className="tiny-header",
-                                            # )
-                                        ],
-                                        style={"overflow-x": "auto"},
-                                    ),
-                                ],
-                                className=" twelve columns",
-                            )
-                        ],
-                        className="row ",
-                    ),
-                    # Row 5
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H6(
-                                        ["Indicator 6"],
-                                        className="subtitle padded",
-                                    ),
-                                    # html.Table(
-                                    #     make_dash_table(df_recent_returns),
-                                    #     className="tiny-header",
-                                    # ),
-                                ],
-                                className=" twelve columns",
-                            )
-                        ],
-                        className="row ",
+                        id="row3"
                     ),
                 ],
                 className="sub_page",
             ),
         ],
         className="page",
+        id="top",
     )

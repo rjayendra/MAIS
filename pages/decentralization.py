@@ -22,71 +22,26 @@ def create_layout(app):
             # page 2
             html.Div(
                 [
+                    html.H6("List of Decentralization Indicators", style={'margin-bottom': '0'}),
+                    html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
+                    html.Br([]),
+
+                    html.P(html.A("Local Government Budget Allocation", href='#row1', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P("Regional Economic Growth Rate", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Infrastructure Development", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Education and Healthcare Access", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Poverty and Inequality", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Local Revenue Generation", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Public Service Efficiency", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Investment in Business Climate", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Institutional Capacity", style={"font-size": "10px", "color": "#888"}),
+                    html.Br([]),html.Br([]),
+                    html.H6("Annually Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
+                    html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
+
                     # Row 1
                     html.Div(
                         [
-                            html.H6("Annually Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
-                            html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
-                            html.Br([]),
-                            # html.Div([
-                            #             html.H6("Local Allocation (Millions of MZN)", className="subtitle padded"),
-                            #             dcc.Graph(
-                            #                 id="graph-1",
-                            #                 figure={
-                            #                     "data": [
-                            #                         go.Scatter(
-                            #                             x=local_allocation['year'],
-                            #                             y=local_allocation['value'],
-                            #                             line={"color": "#97151c"},
-                            #                             mode="lines+markers",
-                            #                             name="",
-                            #                         ),
-                            #                     ],
-                            #                     "layout": go.Layout(
-                            #                         autosize=True,
-                            #                          width=340,
-                            #                          height=200,
-                            #                         font={"family": "Raleway", "size": 10},
-                            #                         margin={
-                            #                             "r": 30,
-                            #                             "t": 30,
-                            #                             "b": 30,
-                            #                             "l": 30,
-                            #                         },
-                            #                         showlegend=False,
-                            #                         titlefont={
-                            #                             "family": "Raleway",
-                            #                             "size": 10,
-                            #                         },
-                            #                         xaxis={
-                            #                             "autorange": True,
-                            #                             "range": [
-                            #                                 "2007-12-31",
-                            #                                 "2018-03-06",
-                            #                             ],                                                       
-                            #                             "showline": False,
-                            #                             "type": "date",
-                            #                             "zeroline": False,
-                            #                         },
-                            #                         yaxis={
-                            #                             "autorange": True,
-                            #                             "range": [
-                            #                                 18.6880162434,
-                            #                                 278.431996757,
-                            #                             ],
-                            #                             "showline": False,
-                            #                             "type": "linear",
-                            #                             "zeroline": False,
-                            #                         },
-                            #                     ),
-                            #                 },
-                            #                 config={"displayModeBar": False},
-                            #             ),
-                            #             html.P(html.A("Source: https://www.sipri.org", href='https://www.sipri.org/databases/milex', target="_blank", style={"font-size": "10px", "color": "#888"})),
-                                        
-                            #     ],
-                            #             className = "six columns",
-                            # ),
                             html.Div([  
                                         html.H6("Local Govenrment Budget Allocation", className="subtitle padded"),
                                         dcc.Graph(
@@ -174,9 +129,9 @@ def create_layout(app):
                                 ],
                                     className="six columns"
                             ),
-
                         ],
-                                #className="row",
+                            className="row",
+                            id="row1",
                     ),
                     # Row 2
                     # html.Div(
@@ -358,4 +313,5 @@ def create_layout(app):
             ),
         ],
         className="page",
+        id="top",
     )

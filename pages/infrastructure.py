@@ -10,7 +10,6 @@ import plotly.graph_objs as go
 #PATH = pathlib.Path(__file__).parent
 DATA_PATH = Path(__file__).parent.parent / 'data' / '4.infrastructure' / 'infrastructure.xlsx'
 #DATA_PATH = DATA_PATH.joinpath("")
-#print(DATA_PATH)
 df_internet = pd.read_excel(DATA_PATH, sheet_name = 'internet')
 df_mobile = pd.read_excel(DATA_PATH, sheet_name = 'cellphone')
 
@@ -18,111 +17,19 @@ def create_layout(app):
     return html.Div(
         [
             Header(app),
-            # page 5
-            # html.Div(
-            #     [
-            #         # Row 1
-            #         html.Div(
-            #             [
-            #            html.Div(
-            #                     [
-            #                         html.H6(
-            #                             ["Internet users in Mozambique"], 
-            #                             className="subtitle padded"
-            #                         ),
-            #                         # html.P(content),
-            #                         html.Ul(
-            #                             [
-            #                                 html.Br([]),
-            #                                 html.Li("There were 6.72 million internet users in Mozambique in January 2021"),
-            #                                 html.Li("The number of internet users in Mozambique increased by 1.4 million (+25%) between 2020 and 2021."),
-            #                                 html.Li("Internet penetration in Mozambique stood at 21.2% in January 2021."),
-            #                                 html.Li("Note: The data sourced from social media platforms is not included in the internet user numbers."),
-                                         
-            #                             ],
-            #                             #style={"color": "#7a7a7a"},
-            #                             className="bulletps",
-            #                             style={
-            #                                 "background-color": "#f9f9f9",
-            #                                 "padding-bottom": "30px",
-            #                             },
-            #                         ),
-            #                         html.P(html.A("Source: https://datareportal.com", href='https://datareportal.com/reports/digital-2021-mozambique', target="_blank", style={"font-size": "10px", "color": "#888"})),
-            #                     ],
-            #                     className="twelve columns",
-            #                 )
-            #             ],
-            #             className="row ",
-            #         ),
-            #         # Row 2
-            #         html.Div(
-            #             [
-            #                 html.Div(
-            #                     [
-            #                         html.Br([]),
-            #                         html.H6(
-            #                             ["Mobile connections in Mozambique in 2022"],
-            #                             className="subtitle padded",
-            #                         ),
-            #                         html.Ul(
-            #                             [
-            #                                 html.Br([]),
-            #                                 html.Li([
-            #                                     "Data from ",
-            #                                     dcc.Link("GSMA Intelligence", href="https://www.gsmaintelligence.com/?utm_source=DataReportal&utm_medium=article&utm_campaign=State_Internet_Connectivity", target="_blank"),
-            #                                     " shows that there were 17.14 million cellular mobile connections in Mozambique at the start of 2022."                                                
-            #                                 ],),
-            #                                 html.Li("However, note that many people around the world make use of more than one mobile connection – for example, they might have one connection for personal use, and another one for work – so it’s not unusual for mobile connection figures to significantly exceed figures for total population."),
-            #                                 html.Li("GSMA Intelligence’s numbers indicate that mobile connections in Mozambique were equivalent to 52.5 percent of the total population in January 2022."),
-            #                                 html.Li("The number of mobile connections in Mozambique increased by 1.2 million (+7.7 percent) between 2021 and 2022."),                                         
-            #                             ],
-            #                             className="bulletps",
-            #                             style={
-            #                                 "color": "#7a7a7a",
-            #                                 "background-color": "#f9f9f9",
-            #                                 "padding-bottom": "30px",
-            #                             },
-            #                         ),
-            #                         html.P(html.A("Source: https://datareportal.com", href='https://datareportal.com/reports/digital-2021-mozambique', target="_blank", style={"font-size": "10px", "color": "#888"})),
-            #                     ],
-            #                     className="twelve columns",
-            #                 )
-            #             ],
-            #             className="row ",
-            #         ),
-            #         # Row 3
-            #         html.Div(
-            #             [
-            #                 # html.Div(
-            #                 #     [
-            #                 #         html.H6(
-            #                 #             ["Realized/unrealized gains as of 01/31/2018"],
-            #                 #             className="subtitle tiny-header padded",
-            #                 #         )
-            #                 #     ],
-            #                 #     className=" twelve columns",
-            #                 # )
-            #             ],
-            #             className="row ",
-            #         ),
-            #         # Row 4
-            #         html.Div(
-            #             #[
-            #             #     html.Div(
-            #             #         [html.Table(make_dash_table(df_realized))],
-            #             #         className="six columns",
-            #             #     ),
-            #             #     html.Div(
-            #             #         [html.Table(make_dash_table(df_unrealized))],
-            #             #         className="six columns",
-            #             #     ),
-            #             # ],
-            #             className="row ",
-            #         ),
-            #     ],
-            #     className="sub_page",
-            # ),
             html.Div([
+                    html.H6("List of Infrastructure Indicators", style={'margin-bottom': '0'}),
+                    html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
+                    html.Br([]),
+                    html.P("Road networks", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Toll gates network", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Urban Mobility Index", style={"font-size": "10px", "color": "#888"}),
+                    html.P(html.A("Mobile network coverage", href='#row1', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P(html.A("Internet penetration", href='#row1', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P("Health facilities", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Water infrastructures", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Irrigation infrastructures", style={"font-size": "10px", "color": "#888"}),
+                    html.Br([]),html.Br([]),
                     html.H6("Annually Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
                     html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
                     html.Div(
@@ -325,6 +232,7 @@ def create_layout(app):
 
                         ],
                                 className="row",
+                                id="row1",
                     ),
             ],
             className="sub_page",

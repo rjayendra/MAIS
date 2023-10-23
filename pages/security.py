@@ -36,14 +36,25 @@ def create_layout(app):
     return html.Div(
         [
             Header(app),
-            # page 2
-            html.Div(
-                [
-                    # Row 1
-                    html.Div(
-                        [
-                            html.H6("Annually Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
-                            html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
+            html.Div([
+                    html.H6("List of Security Indicators", style={'margin-bottom': '0'}),
+                    html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
+                    html.Br([]),
+                    html.P("Number of registered Internally Displaced Persons (IDPs)", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Total defense budget / ministry budget", style={"font-size": "10px", "color": "#888"}),
+                    html.P(html.A("Military spending", href='#row1', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P("The budget allocated to the Ministry of Defense", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Crimes reported by police", style={"font-size": "10px", "color": "#888"}),
+                    html.P(html.A("Homicide rate", href='#row1', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.P("Robbery rate", style={"font-size": "10px", "color": "#888"}),
+                    html.P("Prison Population rate", style={"font-size": "10px", "color": "#888"}),
+                    html.P(html.A("Armed force personnel", href='#row2', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"})),
+                    html.Br([]),html.Br([]),
+                    html.H6("Annually Reported Indicators", style={'margin-bottom': '0'}), # Header above Horizontal Line
+                    html.Hr(style={'margin-top': '0', 'margin-bottom': '0'}), # Horizontal line with no top margin
+
+                    # Row1
+                    html.Div([
                             html.Div([
                                         html.H6("Military Expenditure (MZN)", className="subtitle padded"),
                                         dcc.Graph(
@@ -55,6 +66,7 @@ def create_layout(app):
                                                         y=mExp_values,
                                                         line={"color": "#97151c"},
                                                         mode="lines+markers",
+                                                        marker=dict(size=3),
                                                         name="",
                                                     ),
                                                     # go.Scatter(
@@ -154,6 +166,7 @@ def create_layout(app):
                                                         y=df_homRt['rate'],
                                                         line={"color": "#97151c"},
                                                         mode="lines+markers",
+                                                        marker=dict(size=3),
                                                         name="Rate",
                                                     ),
                                                     go.Bar(
@@ -257,7 +270,8 @@ def create_layout(app):
                             ),
 
                         ],
-                                #className="row",
+                            className="row",
+                            id="row1",
                     ),
                     # Row 2
                     html.Div(
@@ -274,6 +288,7 @@ def create_layout(app):
                                                     y=df_armedForces["value"],
                                                     line={"color": "#97151c"},
                                                     mode="lines+markers",
+                                                    marker=dict(size=3),
                                                     name="",
                                                 ),
                                             ],
@@ -302,28 +317,22 @@ def create_layout(app):
                                                     "rangeselector": {
                                                         "buttons": [
                                                             {
-                                                                "count": 1,
-                                                                "label": "1Y",
-                                                                "step": "year",
-                                                                "stepmode": "backward",
-                                                            },
-                                                            {
-                                                                "count": 3,
-                                                                "label": "3Y",
-                                                                "step": "year",
-                                                                "stepmode": "backward",
-                                                            },
-                                                            {
-                                                                "count": 5,
-                                                                "label": "5Y",
-                                                                "step": "year",
-                                                            },
-                                                            {
                                                                 "count": 10,
                                                                 "label": "10Y",
                                                                 "step": "year",
                                                                 "stepmode": "backward",
                                                             },
+                                                            {
+                                                                "count": 20,
+                                                                "label": "20Y",
+                                                                "step": "year",
+                                                                "stepmode": "backward",
+                                                            },
+                                                            {
+                                                                "count": 30,
+                                                                "label": "30Y",
+                                                                "step": "year",
+                                                            },                                                         
                                                             {
                                                                 "label": "All",
                                                                 "step": "all",
@@ -348,86 +357,93 @@ def create_layout(app):
                                         },
                                         config={"displayModeBar": False},
                                     ),
+                                    html.P([
+                                        html.A("Top", href='#top', style={"font-size": "10px", "color": "#888", "border-bottom": "1px solid #888"}),
+                                        html.A(" | ", href='#top', style={"font-size": "10px", "color": "#888"}),
+                                        html.A("Source: worldbank", href='https://data.worldbank.org/indicator/MS.MIL.TOTL.P1?locations=MZ', target="_blank", style={"font-size": "10px", "color": "#888"}),
+                                    ]),                                        
                                 ],
                                 className="twelve columns",
                             )
                         ],
                         className="row ",
+                        id="row2",
                     ),
                     # Row 3
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H6(
-                                        [
-                                            "Indicator 4"
-                                        ],
-                                        className="subtitle padded",
-                                    ),
-                                    html.Div(
-                                        [
-                                            # html.Table(
-                                            #     make_dash_table(df_avg_returns),
-                                            #     className="tiny-header",
-                                            # )
-                                        ],
-                                        style={"overflow-x": "auto"},
-                                    ),
-                                ],
-                                className="twelve columns",
-                            )
-                        ],
-                        className="row ",
-                    ),
+                    # html.Div(
+                    #     [
+                    #         html.Div(
+                    #             [
+                    #                 html.H6(
+                    #                     [
+                    #                         "Indicator 4"
+                    #                     ],
+                    #                     className="subtitle padded",
+                    #                 ),
+                    #                 html.Div(
+                    #                     [
+                    #                         # html.Table(
+                    #                         #     make_dash_table(df_avg_returns),
+                    #                         #     className="tiny-header",
+                    #                         # )
+                    #                     ],
+                    #                     style={"overflow-x": "auto"},
+                    #                 ),
+                    #             ],
+                    #             className="twelve columns",
+                    #         )
+                    #     ],
+                    #     className="row ",
+                    # ),
                     # Row 4
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H6(
-                                        [
-                                            "Indicator 5"
-                                        ],
-                                        className="subtitle padded",
-                                    ),
-                                    html.Div(
-                                        [
-                                            # html.Table(
-                                            #     make_dash_table(df_after_tax),
-                                            #     className="tiny-header",
-                                            # )
-                                        ],
-                                        style={"overflow-x": "auto"},
-                                    ),
-                                ],
-                                className=" twelve columns",
-                            )
-                        ],
-                        className="row ",
-                    ),
+                    # html.Div(
+                    #     [
+                    #         html.Div(
+                    #             [
+                    #                 html.H6(
+                    #                     [
+                    #                         "Indicator 5"
+                    #                     ],
+                    #                     className="subtitle padded",
+                    #                 ),
+                    #                 html.Div(
+                    #                     [
+                    #                         # html.Table(
+                    #                         #     make_dash_table(df_after_tax),
+                    #                         #     className="tiny-header",
+                    #                         # )
+                    #                     ],
+                    #                     style={"overflow-x": "auto"},
+                    #                 ),
+                    #             ],
+                    #             className=" twelve columns",
+                    #         )
+                    #     ],
+                    #     className="row ",
+                    # ),
                     # Row 5
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H6(
-                                        ["Indicator 6"],
-                                        className="subtitle padded",
-                                    ),
-                                    # html.Table(
-                                    #     make_dash_table(df_recent_returns),
-                                    #     className="tiny-header",
-                                    # ),
-                                ],
-                                className=" twelve columns",
-                            )
-                        ],
-                        className="row ",
-                    ),
+                    # html.Div(
+                    #     [
+                    #         html.Div(
+                    #             [
+                    #                 html.H6(
+                    #                     ["Indicator 6"],
+                    #                     className="subtitle padded",
+                    #                 ),
+                    #                 # html.Table(
+                    #                 #     make_dash_table(df_recent_returns),
+                    #                 #     className="tiny-header",
+                    #                 # ),
+                    #             ],
+                    #             className=" twelve columns",
+                    #         )
+                    #     ],
+                    #     className="row ",
+                    # ),
                 ],
                 className="sub_page",
             ),
         ],
         className="page",
+        id="top",
     )
