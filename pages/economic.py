@@ -148,6 +148,7 @@ with open(gdf_file_path) as f:
 # Convert the GeoJSON data to a GeoDataFrame
 gdf = gpd.GeoDataFrame.from_features(data['features'])
 
+#print(data);
 
 # Define custom colors and text labels for each phase
 phase_colors = {
