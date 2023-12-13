@@ -20,6 +20,7 @@ from pages import (
     infrastructure,
     security,
     decentralization,
+    spcps,
 )
 
 app = dash.Dash(
@@ -30,16 +31,16 @@ server = app.server
 
 # #############################################################################################################
 # ################LOG IN#############
-# VALID_USERNAME_PASSWORD_PAIRS = [
-#     ['usaid', 'usaid']
-# ]
+VALID_USERNAME_PASSWORD_PAIRS = [
+    ['usaid', 'usaid']
+]
 # ###################################
 # #### Authorizing the App ####################################################################################
 
-# auth = dash_auth.BasicAuth(
-#     app,
-#     VALID_USERNAME_PASSWORD_PAIRS
-# )
+auth = dash_auth.BasicAuth(
+    app,
+    VALID_USERNAME_PASSWORD_PAIRS
+)
 # #############################################################################################################
 
 # Describe the layout/ UI of the app
@@ -79,6 +80,8 @@ def display_page(pathname):
         return security.create_layout(app)
     elif pathname == "/mais/decentralization":
         return decentralization.create_layout(app)
+    elif pathname == "/mais/spcps":
+        return spcps.create_layout(app)
     elif pathname == "/mais/full-view":
         return (
             economic.create_layout(app),
@@ -88,6 +91,7 @@ def display_page(pathname):
             infrastructure.create_layout(app),
             security.create_layout(app),
             decentralization.create_layout(app),
+            spcps.create_layout(app),
         )
     else:
         return economic.create_layout(app)
